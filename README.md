@@ -63,9 +63,8 @@ Follow the on-screen prompts to interact with the database.
 
 For a full walkthrough of the application's functionality, please refer to the following video:
 
-[![Employee Tracker Walkthrough Video](video-thumbnail-url)](video-link-url)
+[Employee Tracker Walkthrough Video](https://drive.google.com/file/d/1qiM3ApzlWLzpjdEhzx96gpmw9cdLLwjW/view?usp=sharing)
 
-*Note: Replace `video-thumbnail-url` and `video-link-url` with the actual links to your video.*
 
 ## Features
 

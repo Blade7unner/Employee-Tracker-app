@@ -1,29 +1,26 @@
-// server.js
-
-// Import necessary modules
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
-// Set up your database connection
+// database connection
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root', // Your MAMP MySQL username
-    password: 'root', // Your MAMP MySQL password
+    user: 'root', 
+    password: 'root', 
     database: 'employee_tracker',
-    port: 8889 // The port MAMP MySQL is running on
+    port: 8889 
 });
 
-// Connect to the database
+
 db.connect(err => {
     if (err) {
         console.error('Error connecting: ' + err.stack);
         return;
     }
     console.log('Connected as id ' + db.threadId);
-    runApp(); // Start the application after connecting to the database
+    runApp(); 
 });
 
-// runApp function starts your application after connecting to the database
+
 function runApp() {
     inquirer.prompt({
         name: 'action',
@@ -74,8 +71,6 @@ function runApp() {
     });
 }
 
-// Define functions for each action
-// ... (include all other function implementations here)
 // Function implementations
 
 function viewAllDepartments() {
@@ -120,21 +115,21 @@ function addDepartment() {
     });
 }
 
-// ... (implement addEmployee, addRole, and updateEmployeeRole functions similarly)
+
 // Function to add an employee
 function addEmployee() {
-    // First, get the list of roles to allow the user to select one
+    
     db.promise().query('SELECT id, title FROM role')
         .then(([roles]) => {
             const roleChoices = roles.map(role => ({ name: role.title, value: role.id }));
 
-            // Then, get the list of employees to select a manager
+            
             return db.promise().query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employee')
                 .then(([employees]) => {
                     const managerChoices = employees.map(employee => ({ name: employee.name, value: employee.id }));
                     managerChoices.unshift({ name: 'None', value: null });
 
-                    // Prompt the user for the new employee's information
+                    
                     return inquirer.prompt([
                         {
                             name: 'firstName',
@@ -162,7 +157,7 @@ function addEmployee() {
                 });
         })
         .then(answers => {
-            // Insert the new employee into the database
+           
             return db.promise().query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', 
                 [answers.firstName, answers.lastName, answers.roleId, answers.managerId]);
         })
@@ -175,12 +170,12 @@ function addEmployee() {
 
 // Function to add a role
 function addRole() {
-    // Get the list of departments to allow the user to select one
+    
     db.promise().query('SELECT id, name FROM department')
         .then(([departments]) => {
             const departmentChoices = departments.map(dept => ({ name: dept.name, value: dept.id }));
 
-            // Prompt the user for the new role's information
+            
             return inquirer.prompt([
                 {
                     name: 'title',
@@ -207,7 +202,7 @@ function addRole() {
             ]);
         })
         .then(answers => {
-            // Insert the new role into the database
+            
             return db.promise().query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', 
                 [answers.title, answers.salary, answers.departmentId]);
         })
@@ -220,17 +215,17 @@ function addRole() {
 
 // Function to update an employee role
 function updateEmployeeRole() {
-    // First, get the list of employees
+    
     db.promise().query('SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employee')
         .then(([employees]) => {
             const employeeChoices = employees.map(employee => ({ name: employee.name, value: employee.id }));
 
-            // Then, get the list of roles
+            
             return db.promise().query('SELECT id, title FROM role')
                 .then(([roles]) => {
                     const roleChoices = roles.map(role => ({ name: role.title, value: role.id }));
 
-                    // Prompt the user to select an employee and a new role
+                    
                     return inquirer.prompt([
                         {
                             name: 'employeeId',
@@ -257,5 +252,3 @@ function updateEmployeeRole() {
         .catch(console.log)
         .then(() => runApp());
 }
-
-// Make sure to replace db.query with db.promise().query in your existing functions for consistent use of Promises.

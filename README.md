@@ -20,7 +20,7 @@ To install the Employee Tracker application, follow these steps:
 1. Clone the repository to your local machine using:
 
    ```sh
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/Blade7unner/Employee-Tracker-app.git
    ```
 
 2. Navigate to the cloned repository directory:

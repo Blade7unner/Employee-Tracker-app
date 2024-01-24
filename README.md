@@ -11,8 +11,7 @@ Employee Tracker is a command-line application to manage a company's employee da
 - [Usage](#usage)
 - [Walkthrough Video](#walkthrough-video)
 - [Features](#features)
-- [Contributing](#contributing)
-- [Questions](#questions)
+  
 
 ## Installation
 
@@ -74,10 +73,3 @@ For a full walkthrough of the application's functionality, please refer to the f
 - Connection to MySQL database to store and retrieve data
 - Ability to view, add, and update employees, departments, and roles
 
-## Contributing
-
-Contributions to the Employee Tracker are welcome! Please follow the [Contributor Covenant](https://www.contributor-covenant.org/) as a guideline for community interactions.
-
-## Questions
-
-For any questions or concerns, please open an issue or contact me directly at your-email@example.com. You can find more of my work at [your-username](https://github.com/your-username/).
